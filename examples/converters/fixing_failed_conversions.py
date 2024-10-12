@@ -1,13 +1,13 @@
 import argparse
 import os
 from concurrent.futures import ProcessPoolExecutor, as_completed
-from fog_x.loader import RLDSLoader
-import fog_x
+from robodm.loader import RLDSLoader
+import robodm
 import time
 def check_and_fix_conversion(file_path, data_traj, dataset_name, index, destination_dir, lossless):
     try:
         # Try to load the existing file
-        fog_x.Trajectory(file_path).load()
+        robodm.Trajectory(file_path).load()
         print(f"File {file_path} is valid.")
         return index, True
     except Exception as e:
@@ -17,12 +17,12 @@ def check_and_fix_conversion(file_path, data_traj, dataset_name, index, destinat
         try:
             data_traj = data_traj[0]
             if lossless:
-                fog_x.Trajectory.from_list_of_dicts(
+                robodm.Trajectory.from_list_of_dicts(
                     data_traj, path=file_path,
                     lossy_compression=False
                 )
             else:
-                fog_x.Trajectory.from_list_of_dicts(
+                robodm.Trajectory.from_list_of_dicts(
                     data_traj, path=file_path, 
                     lossy_compression=True,
                 )

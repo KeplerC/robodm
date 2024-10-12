@@ -300,8 +300,8 @@ def to_hf_dataset(data_dict, video) -> Dataset:
 dataset_name = "nyu_door_opening_surprising_effectiveness"
 # load the rlds dataset
 dataset = load_from_raw(
-    raw_dir=f"/mnt/data/fog_x/rlds/{dataset_name}/",
-    videos_dir=Path(f"/mnt/data/fog_x/hf/{dataset_name}/videos"),
+    raw_dir=f"/mnt/data/robodm/rlds/{dataset_name}/",
+    videos_dir=Path(f"/mnt/data/robodm/hf/{dataset_name}/videos"),
     fps=12,
     video=True,
     openx_dataset_name=dataset_name,
@@ -311,4 +311,4 @@ dataset = load_from_raw(
 hf_dataset = to_hf_dataset(dataset, video=True)
 
 # save to hf
-hf_dataset.save_to_disk("/mnt/data/fog_x/hf/nyu_door_opening_surprising_effectiveness")
+hf_dataset.save_to_disk("/mnt/data/robodm/hf/nyu_door_opening_surprising_effectiveness")

@@ -7,7 +7,7 @@ import pyarrow as pa
 import pyarrow.dataset as ds
 import pyarrow.parquet as pq
 
-from fog_x.database.utils import _datasets_dtype_to_pld
+from robodm.database.utils import _datasets_dtype_to_pld
 import smart_open
 logger = logging.getLogger(__name__)
 

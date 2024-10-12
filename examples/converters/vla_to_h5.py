@@ -1,10 +1,10 @@
-import fog_x 
+import robodm 
 import os
 import argparse
 from concurrent.futures import ProcessPoolExecutor, as_completed, TimeoutError
 from tqdm import tqdm
 import threading
-from fog_x.loader import NonShuffleVLALoader
+from robodm.loader import NonShuffleVLALoader
 import h5py
 import time
 
@@ -46,7 +46,7 @@ def main():
     args = parser.parse_args()
 
     vla_path = os.path.join(args.data_dir, args.dataset_name, "*.vla")
-    cache_dir = os.path.join("/mnt/data/fog_x/cache/", args.dataset_name)
+    cache_dir = os.path.join("/mnt/data/robodm/cache/", args.dataset_name)
     print(vla_path, cache_dir)
     loader = NonShuffleVLALoader(vla_path, cache_dir=cache_dir)
 

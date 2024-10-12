@@ -5,9 +5,9 @@ from typing import Any, Dict, List, Optional, Text
 import av
 import numpy as np
 import os
-from fog_x import FeatureType
+from robodm import FeatureType
 import pickle
-from fog_x.utils import recursively_read_hdf5_group
+from robodm.utils import recursively_read_hdf5_group
 import h5py
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
@@ -46,8 +46,8 @@ class Trajectory:
     def __init__(
         self,
         path: Text,
-        mode="r",
-        cache_dir: Optional[Text] = "/tmp/fog_x/cache/",
+        mode="w",
+        cache_dir: Optional[Text] = "/tmp/robodm/cache/",
         lossy_compression: bool = True,
         feature_name_separator: Text = "/",
     ) -> None:
@@ -149,6 +149,7 @@ class Trajectory:
         if compact:
             # After closing, re-read from the cache to encode pickled data to images
             self._transcode_pickled_images(ending_timestamp=ts)
+        self.container_file.close()
         self.trajectory_data = None
         self.container_file = None
         self.is_closed = True
@@ -338,7 +339,7 @@ class Trajectory:
             {"feature1": "value3", "feature2": "value4"},
         ]
 
-        trajectory = Trajectory.from_list_of_dicts(original_trajectory, path="/tmp/fog_x/output.vla")
+        trajectory = Trajectory.from_list_of_dicts(original_trajectory, path="/tmp/robodm/output.vla")
         """
         traj = cls(path, mode="w", lossy_compression=lossy_compression)
         logger.info(f"Creating a new trajectory file at {path} with {len(data)} steps")
@@ -367,7 +368,7 @@ class Trajectory:
             "feature2": ["value2", "value4"],
         }
 
-        trajectory = Trajectory.from_dict_of_lists(original_trajectory, path="/tmp/fog_x/output.vla")
+        trajectory = Trajectory.from_dict_of_lists(original_trajectory, path="/tmp/robodm/output.vla")
         """
         traj = cls(path, feature_name_separator=feature_name_separator, mode="w", lossy_compression = lossy_compression)
         # flatten the data such that all data starts and put feature name with separator
@@ -422,7 +423,13 @@ class Trajectory:
                     length += 1
             return length
         
-        container_to_get_length = av.open(self.path, mode="r", format="matroska")
+        try:
+            container_to_get_length = av.open(self.path, mode="r", format="matroska")
+        except Exception as e:
+            logger.error(f"Error opening container file {self.path}: {str(e)}")
+            logger.error(f"File exists: {os.path.exists(self.path)}")
+            logger.error(f"File size: {os.path.getsize(self.path) if os.path.exists(self.path) else 'N/A'}")
+            raise
         streams = container_to_get_length.streams
         length = _get_length_of_stream(container_to_get_length, streams[0])
         logger.debug(f"Length of the stream is {length}")
@@ -749,7 +756,7 @@ class Trajectory:
             stream.height = feature_type.shape[0]
             stream.codec_context.options = {
                 "g": "2",
-                'crf': '30',  # Constant Rate Factor (quality)
+                'crf': '23',  # Constant Rate Factor (quality)
             }
             # stream.codec_context.options = {
             #     "preset": "ultrafast",  # Set preset to 'ultrafast' for quicker encoding

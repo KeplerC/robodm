@@ -1,7 +1,7 @@
 import os
 from typing import Any, Dict, List, Optional, Text
-from fog_x.loader.vla import VLALoader, NonShuffleVLALoader
-from fog_x.utils import data_to_tf_schema
+from robodm.loader.vla import VLALoader, NonShuffleVLALoader
+from robodm.utils import data_to_tf_schema
 import numpy as np
 
 class VLADataset:

@@ -1,9 +1,9 @@
 import os
 import numpy as np
-from fog_x.trajectory import Trajectory
-from fog_x.utils import _flatten
+from robodm.trajectory import Trajectory
+from robodm.utils import _flatten
 import imageio
-from fog_x.loader import RLDSLoader
+from robodm.loader import RLDSLoader
 
 def load_ffv1_trajectory(path):
     traj = Trajectory(path,)
@@ -92,7 +92,7 @@ def main():
     # dataset_name = "bridge"
     dataset_name = "fractal20220817_data"
     base_path = f"/home/kych/datasets/{dataset_name}"
-    # base_path = "/mnt/data/fog_x"
+    # base_path = "/mnt/data/robodm"
     ffv1_dir = os.path.join(base_path, "ffv1", dataset_name)
     vla_dir = os.path.join(base_path, "vla", dataset_name)
     rlds_dir = "/home/kych/datasets/rtx"

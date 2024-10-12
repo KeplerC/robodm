@@ -1,4 +1,4 @@
-"""CLI interface for fog_x project.
+"""CLI interface for robodm project.
 
 Be creative! do whatever you want!
 
@@ -12,7 +12,7 @@ Be creative! do whatever you want!
 def main():  # pragma: no cover
     """
     The main function executes on commands:
-    `python -m fog_x` and `$ fog_x `.
+    `python -m robodm` and `$ robodm `.
 
     This is your program's entry point.
 

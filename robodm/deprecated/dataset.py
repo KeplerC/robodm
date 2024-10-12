@@ -7,15 +7,15 @@ import numpy as np
 import polars
 import pandas
 
-from fog_x.database import (
+from robodm.database import (
     DatabaseConnector,
     DatabaseManager,
     DataFrameConnector,
     LazyFrameConnector,
     PolarsConnector,
 )
-from fog_x.episode import Episode
-from fog_x.feature import FeatureType
+from robodm.episode import Episode
+from robodm.feature import FeatureType
 
 logger = logging.getLogger(__name__)
 
@@ -93,7 +93,7 @@ class Dataset:
 
         Example:
         ```
-        >>> dataset = fog_x.Dataset('my_dataset', path='~/fog_x/my_dataset`)
+        >>> dataset = robodm.Dataset('my_dataset', path='~/robodm/my_dataset`)
         ```
 
         TODO:
@@ -227,7 +227,7 @@ class Dataset:
         from envlogger import step_data
         from tensorflow_datasets.core.features import Tensor
 
-        from fog_x.rlds.writer import CloudBackendWriter
+        from robodm.rlds.writer import CloudBackendWriter
 
         self.obs_keys += obs_keys
         self.act_keys += act_keys
@@ -380,7 +380,7 @@ class Dataset:
         # this is only required if rtx format is used
         import tensorflow_datasets as tfds
 
-        from fog_x.rlds.utils import dataset2path
+        from robodm.rlds.utils import dataset2path
         b = tfds.builder_from_directory(builder_dir=dataset2path(name))
         self._build_rtx_episodes_from_tfds_builder(
             b,
@@ -458,7 +458,7 @@ class Dataset:
 
         # this is only required if rtx format is used
         import tensorflow_datasets as tfds
-        from fog_x.rlds.utils import dataset2path
+        from robodm.rlds.utils import dataset2path
         import cv2
 
         b = tfds.builder_from_directory(builder_dir=dataset2path(name))

@@ -3,8 +3,8 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "fog_x"
-version = "0.2.0"
+name = "robodm"
+version = "0.3.0"
 dependencies = [
     "numpy",
     "pillow",
@@ -21,9 +21,8 @@ keywords = ["robotics", "data", "management", "collection", "framework", "learni
 [project.optional-dependencies]
 hf = ["datasets"]
 rtx = ["tensorflow", "tensorflow_datasets", "envlogger"]
-aws = ["boto3"]
 torch = ["torch"]
-all = ["datasets", "tensorflow", "tensorflow_datasets", "envlogger", "boto3", "smart_open", "torch", "torchvision"]
+all = ["datasets", "tensorflow", "tensorflow_datasets", "smart_open", "torch", "torchvision"]
 
 [project.urls]
-homepage = "https://github.com/BerkeleyAutomation/fog_x/"
+homepage = "https://github.com/KeplerC/robodm"

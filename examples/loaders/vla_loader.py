@@ -1,9 +1,9 @@
-from fog_x.loader import VLALoader
-import fog_x
+from robodm.loader import VLALoader
+import robodm
 import os
 
 
-loader = VLALoader("/tmp/fog_x/vla/berkeley_autolab_ur5/*.vla")
+loader = VLALoader("/tmp/robodm/vla/berkeley_autolab_ur5/*.vla")
 for index, data_traj in enumerate(loader):
 
     print(data_traj.load())

@@ -1,7 +1,7 @@
 
 from typing import Any, Dict
 import numpy as np
-from fog_x.feature import FeatureType
+from robodm.feature import FeatureType
 
 
 def data_to_tf_schema(data: Dict[str, Any]) -> Dict[str, FeatureType]:

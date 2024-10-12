@@ -1,5 +1,5 @@
-from fog_x.loader.base import BaseLoader
-import fog_x
+from robodm.loader.base import BaseLoader
+import robodm
 import glob
 import logging
 import asyncio
@@ -14,7 +14,7 @@ from multiprocessing import Manager
 logger = logging.getLogger(__name__)
 
 class VLALoader:
-    def __init__(self, path: Text, batch_size=1, cache_dir="/tmp/fog_x/cache/", buffer_size=50, num_workers=-1, return_type = "numpy", split="all"):
+    def __init__(self, path: Text, batch_size=1, cache_dir="/tmp/robodm/cache/", buffer_size=50, num_workers=-1, return_type = "numpy", split="all"):
         self.files = self._get_files(path, split)
         self.split = split
         
@@ -54,7 +54,7 @@ class VLALoader:
     def _read_vla(self, data_path, return_type = None):
         if return_type is None:
             return_type = self.return_type
-        traj = fog_x.Trajectory(data_path, cache_dir=self.cache_dir)
+        traj = robodm.Trajectory(data_path, cache_dir=self.cache_dir)
         ret = traj.load(return_type = return_type)
         return ret
 
@@ -130,7 +130,7 @@ class VLALoader:
             
             
 class NonShuffleVLALoader:
-    def __init__(self, path: Text, batch_size=1, cache_dir="/tmp/fog_x/cache/", num_workers=1, return_type = "numpy"):
+    def __init__(self, path: Text, batch_size=1, cache_dir="/tmp/robodm/cache/", num_workers=1, return_type = "numpy"):
         self.files = self._get_files(path)
         self.cache_dir = cache_dir
         self.batch_size = batch_size
@@ -189,7 +189,7 @@ class NonShuffleVLALoader:
     def _read_vla(self, data_path, return_type = None):
         if return_type is None:
             return_type = self.return_type
-        traj = fog_x.Trajectory(data_path, cache_dir=self.cache_dir)
+        traj = robodm.Trajectory(data_path, cache_dir=self.cache_dir)
         ret = traj.load(return_type = return_type)
         return ret
     
@@ -198,7 +198,7 @@ class NonShuffleVLALoader:
 
 import torch
 from torch.utils.data import IterableDataset, DataLoader
-from fog_x.loader.vla import VLALoader
+from robodm.loader.vla import VLALoader
 from typing import Text, Optional
 
 class VLAIterableDataset(IterableDataset):

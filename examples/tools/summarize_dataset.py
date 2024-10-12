@@ -1,5 +1,5 @@
-import fog_x 
-from fog_x.loader import RLDSLoader
+import robodm 
+from robodm.loader import RLDSLoader
 
 path = "/home/kych/datasets/rtx"
 dataset_name = "fractal20220817_data"

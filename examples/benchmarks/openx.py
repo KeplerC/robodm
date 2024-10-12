@@ -3,18 +3,18 @@ import subprocess
 import argparse
 import time
 import numpy as np
-from fog_x.loader import RLDSLoader, VLALoader, HDF5Loader
+from robodm.loader import RLDSLoader, VLALoader, HDF5Loader
 import tensorflow as tf
 import pandas as pd
-import fog_x
+import robodm
 import csv
 import stat
-from fog_x.loader.lerobot import LeRobotLoader
-from fog_x.loader.vla import get_vla_dataloader
-from fog_x.loader.hdf5 import get_hdf5_dataloader
+from robodm.loader.lerobot import LeRobotLoader
+from robodm.loader.vla import get_vla_dataloader
+from robodm.loader.hdf5 import get_hdf5_dataloader
 
 # Constants
-DEFAULT_EXP_DIR = "/mnt/data/fog_x/"
+DEFAULT_EXP_DIR = "/mnt/data/robodm/"
 DEFAULT_NUMBER_OF_TRAJECTORIES = -1  # Load all trajectories
 DEFAULT_DATASET_NAMES = [
     "nyu_door_opening_surprising_effectiveness",
@@ -23,8 +23,8 @@ DEFAULT_DATASET_NAMES = [
     "bridge",
 ]
 # DEFAULT_DATASET_NAMES = ["bridge"]
-# CACHE_DIR = "/tmp/fog_x/cache/"
-CACHE_DIR  = "/mnt/data/fog_x/cache/"
+# CACHE_DIR = "/tmp/robodm/cache/"
+CACHE_DIR  = "/mnt/data/robodm/cache/"
 DEFAULT_LOG_FREQUENCY = 20
 
 # suppress tensorflow warnings

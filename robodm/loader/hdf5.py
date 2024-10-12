@@ -9,7 +9,7 @@ import random
 import multiprocessing as mp
 import time
 import logging
-from fog_x.utils import _flatten, recursively_read_hdf5_group
+from robodm.utils import _flatten, recursively_read_hdf5_group
 
 class HDF5Loader(BaseLoader):
     def __init__(self, path, batch_size=1, buffer_size=50, num_workers=4):

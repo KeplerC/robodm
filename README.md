@@ -8,41 +8,46 @@
 
 ```bash
 git clone https://github.com/KeplerC/robodm.git
-cd fog_x
+cd robodm
 pip install -e .
 ```
 
 ## Usage
 
 ```py
-import fog_x
+import robodm
+import numpy as np
 
 path = "/tmp/output.vla"
 
-# 🦊 Data collection: 
 # create a new trajectory
-traj = fog_x.Trajectory(
-    path = path
+traj = robodm.Trajectory(
+    path = path, mode="w"
 )
 
-traj.add(feature = "arm_view", value = "image1.jpg")
+traj.add(feature = "arm_view", data = np.ones((4, 4)))
 
 # Saves and compresses the trajectory
 traj.close()
 
 # load it 
-fog_x.Trajectory(
+print(robodm.Trajectory(
     path = path
-)
+).load())
+# outputs 
+# {'arm_view': array([[[1., 1., 1., 1.],
+#       [1., 1., 1., 1.],
+#       [1., 1., 1., 1.],
+#       [1., 1., 1., 1.]]])}
 ```
 
 ## Examples
 
-* [Data Collection and Loading](./examples/data_collection_and_load.py)
-* [Convert From Open_X](./examples/openx_loader.py)
-* [Convert From H5](./examples/h5_loader.py)
-* [Running Benchmarks](./benchmarks/openx.py)
+* [Data Collection and Loading](./examples/hello_world/data_collection_and_load.pydata_collection_and_load.py)
+* Conversions From [Open_X](./examples/converters/openx_to_vla.py), [HDF5](./examples/converters/h5_loader.py)
+* [Running Benchmarks](./examples/benchmarks/openx.py)
 
 ## Development
-
+We are actively developing the framework, which may introduce breaking changes. Our active 
+branches are in a separate [repo](https://github.com/BerkeleyAutomation/fog_x/pulls). 
 Read the [CONTRIBUTING.md](CONTRIBUTING.md) file. 
